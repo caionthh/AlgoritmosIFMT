@@ -1,0 +1,53 @@
+/*printf("==========================\n");
+				printf("== CADASTRO DE SERVIÇOS ==\n");
+				printf("==========================\n\n");
+				printf("1 - Pintura\n");
+				printf("2 - Jardinagem\n");
+				printf("3 - Faxina\n");
+				printf("4 - Serviços em Geral\n");
+				scanf("%d", &opcao_menu2);
+				system("cls");	// Limpa tela
+				
+				switch(opcao_menu2)	//Menu para inserção de código e descrição
+				{
+					
+					case 1: // Pintura
+						printf("==============\n");
+						printf("==  PINTURA ==\n");
+						printf("==============\n\n");
+						printf("Código:");
+						scanf("%d", &servico.pintura);
+						printf("\nDescrição:");
+						scanf("%s", &servico.dsc_pintura);	
+						break;
+						
+					case 2: //Jardinagem
+						printf("=================\n");
+						printf("==  JARDINAGEM ==\n");
+						printf("=================\n\n");
+						printf("Código:");
+						scanf("%d", &servico.jardinagem);
+						printf("\nDescrição:");
+						scanf("%s", &servico.dsc_jardinagem);	
+						break;
+						
+					case 3: //Faxina
+						printf("=============\n");
+						printf("==  FAXINA ==\n");
+						printf("=============\n\n");
+						printf("Código:");
+						scanf("%d", &servico.faxina);
+						printf("\nDescrição:");
+						scanf("%s", &servico.dsc_faxina);	
+						break;
+					
+					case 4: //Serviços em Geral
+						printf("========================\n");
+						printf("==  SERVIÇOS EM GERAL ==\n");
+						printf("========================\n\n");
+						printf("Código:");
+						scanf("%d", &servico.geral);
+						printf("\nDescrição:");
+						scanf("%s", &servico.dsc_geral);
+						break;
+				}*/
