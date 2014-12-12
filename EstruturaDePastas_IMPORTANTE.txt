@@ -1,0 +1,10 @@
+Estrutura de Pasta
+
+	NUMERO - Nome do algoritmo
+
+ex:
+	17 - Peso Ideal
+
+
+
+Criar algoritmos bem comentados!
