@@ -1,6 +1,6 @@
 [Project]
-FileName=Projeto1.dev
-Name=Projeto1
+FileName=EstAcidente.dev
+Name=EstAcidente
 Type=1
 Ver=2
 ObjFiles=
@@ -19,7 +19,7 @@ ObjectOutput=
 LogOutput=
 LogOutputEnabled=0
 OverrideOutput=0
-OverrideOutputName=Projeto1.exe
+OverrideOutputName=
 HostApplication=
 UseCustomMakefile=0
 CustomMakefile=
@@ -39,21 +39,21 @@ Build=0
 LanguageID=1033
 CharsetID=1252
 CompanyName=
-FileVersion=1.0.0.0
+FileVersion=
 FileDescription=Developed using the Dev-C++ IDE
 InternalName=
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=
 ProductName=
-ProductVersion=1.0.0.0
+ProductVersion=
 AutoIncBuildNr=0
 SyncProduct=1
 
 [Unit1]
 FileName=main.c
 CompileCpp=0
-Folder=
+Folder=EstAcidente
 Compile=1
 Link=1
 Priority=1000
