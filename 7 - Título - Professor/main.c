@@ -41,6 +41,7 @@ system("color F0");
 	printf("1 - Cadastrar informações relacionadas ao título\n");
 	printf("2 - Cadastrar os professores\n" );
 	printf("3 - Mostrar a relação de professores\n");
+	printf("4 - Sair\n");
 	scanf("%d", &opcao);
 	system("cls");
 	
