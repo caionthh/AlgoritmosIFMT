@@ -17,43 +17,43 @@ struct medico
 };
 
 int main(int argc, char *argv[]) {
-struct medico paciente[20];
-int i;
-float maior_peso = 0;
-char mais_pesado[50];
-int opcao;
-float PesoIdeal (char sexo, float alt);
+	struct medico paciente[20];
+	int i;
+	float maior_peso = 0;
+	char mais_pesado[50];
+	int opcao;
+	float PesoIdeal (char sexo, float alt);
 
-system("color 70");
-
-for(i=0; i<20 ; i++)
-{
-	printf("²²²²²²²²²²²²²²²²²²²\n");
-	printf("²² PACIENTE %d \n", i+1);
-	printf("²²²²²²²²²²²²²²²²²²²\n" );
-	printf("²² NOME:");
-	gets(paciente[i].nome);
-	fflush(stdin);
-	printf("²²²²²²²²²²²²²²²²²\n" );
-	printf("²² IDADE:");
-	scanf("%d", &paciente[i].idade);
-	printf("²²²²²²²²²²²²²²²²²²²\n" );
-	fflush(stdin);
-	printf("²² SEXO (M ou F):");
-	scanf("%c", &paciente[i].sexo);
-	printf("²²²²²²²²²²²²²²²²²²²\n" );
-	printf("²² ALTURA (m): ");
-	scanf("%f", &paciente[i].altura);
-	printf("²²²²²²²²²²²²²²²²²²²\n" );
-	printf("²² PESO (Kg): ");
-	scanf("%f", &paciente[i].peso);
-	fflush(stdin);
-	printf("²²²²²²²²²²²²²²²²²²²\n" );
-	printf("\n\n");	
-	system("cls");
+	system("color 70");
 	
-	paciente[i].peso_ideal = PesoIdeal (paciente[i].sexo, paciente[i].altura);
-}
+	for(i=0; i<20 ; i++)
+	{
+		printf("²²²²²²²²²²²²²²²²²²²\n");
+		printf("²² PACIENTE %d \n", i+1);
+		printf("²²²²²²²²²²²²²²²²²²²\n" );
+		printf("²² NOME:");
+		gets(paciente[i].nome);
+		fflush(stdin);
+		printf("²²²²²²²²²²²²²²²²²\n" );
+		printf("²² IDADE:");
+		scanf("%d", &paciente[i].idade);
+		printf("²²²²²²²²²²²²²²²²²²²\n" );
+		fflush(stdin);
+		printf("²² SEXO (M ou F):");
+		scanf("%c", &paciente[i].sexo);
+		printf("²²²²²²²²²²²²²²²²²²²\n" );
+		printf("²² ALTURA (m): ");
+		scanf("%f", &paciente[i].altura);
+		printf("²²²²²²²²²²²²²²²²²²²\n" );
+		printf("²² PESO (Kg): ");
+		scanf("%f", &paciente[i].peso);
+		fflush(stdin);
+		printf("²²²²²²²²²²²²²²²²²²²\n" );
+		printf("\n\n");	
+		system("cls");
+		
+		paciente[i].peso_ideal = PesoIdeal (paciente[i].sexo, paciente[i].altura);
+	}
 	do
 	{
 		printf("²²²²²²²²²²²²²²²²²\n" );
@@ -121,10 +121,10 @@ for(i=0; i<20 ; i++)
 	return 0;
 }
 
-
+//Metodo para receber peso Ideal
 float PesoIdeal (char sexo, float alt)
 {
-	float peso_ideal; 
+	float peso_ideal = 0; 
 	if ( sexo == 'M' || sexo == 'm')
 	{
 		peso_ideal = (72.7 * alt) - 58;

@@ -4,30 +4,30 @@
 
 //Struct dos estados
 struct Estado {
-	char *nome; //Nome como um vetor
-	int numeroVeiculos; //Numeros de veiculos circulando
-	int numeroAcidentes; //Numero de acidentes	
-	int percentual; //Percentual de carros em relação a quantidade total de estados
+	char nome[255]; //Nome como um vetor
+	float numeroVeiculos; //Numeros de veiculos circulando
+	float numeroAcidentes; //Numero de acidentes	
+	float percentual; //Percentual de carros em relação a quantidade total de estados
 	float mediaAcidentes; //Media de acidentes
 } *estados; //Estados como um vetor
 int quantEstados = 0; //Quantidade de estados registrados
 
 //Struct de estatistica
 struct Estatistica {
-	char *estadoMenorIndice, *estadoMaiorIndice; //Nome dos estados com maior e menor indice
-	int indiceMenor, indiceMaior; //Maior e menor indice de acidentes
-	int somaGeralVeiculos; //Soma de todos os veiculos
+	char estadoMenorIndice[255], estadoMaiorIndice[255]; //Nome dos estados com maior e menor indice
+	float indiceMenor, indiceMaior; //Maior e menor indice de acidentes
+	float somaGeralVeiculos; //Soma de todos os veiculos
 } estatistica;
 
 //Adicionar Estado - Pede Nome, quantidade de veiculos circulando, numero de acidentes
-void AdicionarEstado(char *nome, int veiculos, int acidentes) {
+void AdicionarEstado(char nome[255], float veiculos, float acidentes) {
 	
 	//Realoca memoria do vetor de estados
 	quantEstados += 1; // Adiciona um estado
 	estados = realloc(estados, quantEstados * sizeof(struct Estado)); //Usa função realloc para aumentar a memoria registrada pro vetor de estados
 	
 	//Cadastra novo estado
-	estados[quantEstados-1].nome = nome;
+	strcpy(estados[quantEstados-1].nome, nome);
 	estados[quantEstados-1].numeroVeiculos = veiculos;
 	estados[quantEstados-1].numeroAcidentes = acidentes;
 	
@@ -36,24 +36,25 @@ void AdicionarEstado(char *nome, int veiculos, int acidentes) {
 	
 	//Verifica se este estado tem um indice acima do atual maior
 	if (acidentes > estatistica.indiceMaior) {
-		estatistica.estadoMaiorIndice = nome; //Passa nome do estado
+		strcpy(estatistica.estadoMaiorIndice, nome); //Passa nome do estado
 		estatistica.indiceMaior = acidentes; //Passa acidentes do estado
 	}
 	//Menor que o menor indice ou o indice menor nao foi configurado
 	if (acidentes < estatistica.indiceMenor || estatistica.indiceMenor == 0) {
-		estatistica.estadoMenorIndice = nome; //Passa nome do estado
+		strcpy(estatistica.estadoMenorIndice, nome); //Passa nome do estado
 		estatistica.indiceMenor = acidentes; //Passa acidentes do estado;
 	}
 	
 	//Calcular media de acidentes
-	estados[quantEstados-1].mediaAcidentes = (acidentes + veiculos) / 2;
+	estados[quantEstados-1].mediaAcidentes = acidentes/veiculos;
 	
 	//Gira entre todos os estados e faz as verificacoes necessarias
 	int i = 0;
 	for (i = 0; i < quantEstados; i++) {
 				
 		//Calcula Percentual novo deste estado
-		estados[i].percentual = 100 * ( estados[i].numeroVeiculos / estatistica.somaGeralVeiculos );
+		float percent = estados[i].numeroVeiculos / estatistica.somaGeralVeiculos;
+		estados[i].percentual = 100 * percent;
 	}	
 }
 
@@ -62,21 +63,24 @@ void LerNovoEstado() {
 	
 	//Estado
 	char nome[255];
-	int acidentes = 0, veiculos = 0;
+	float acidentes = 0, veiculos = 0;
 	
 	//Ler novo estado
 	printf("Cadastre um novo estado: \n");
 	printf("\tNome: ");
 	fflush(stdin); //Limpa stdin
-	fgets(&nome, 255, stdin); //Usa fgets para ler o nome de forma segura
+	gets(&nome); //Le o nome
 	fflush(stdin); //Limpa stdin
 	printf("\n\tVeiculos: ");
-	scanf("%d", &veiculos); //Le Veiculos
+	scanf("%f", &veiculos); //Le Veiculos
 	fflush(stdin); //Limpa stdin
 	printf("\n\tAcidentes: ");
-	scanf("%d", &acidentes); //Le Acidentes
+	scanf("%f", &acidentes); //Le Acidentes
 	fflush(stdin); //Limpa stdin
 	printf ("\n########################################\n");
+	
+	//DEBUG
+	//printf("\n\nReaded: %s %d %d\n\n", nome, veiculos, acidentes);
 	
 	//Adicionar estado
 	AdicionarEstado(nome, veiculos, acidentes);
@@ -88,10 +92,10 @@ void MostraIndices() {
 	//Mostra Maior
 	printf("Indices de Acidente:\n");
 	printf("\tMaior Indice pertence a: %s\n", estatistica.estadoMaiorIndice);
-	printf("\tNumero de acidentes: %d\n", estatistica.indiceMaior);
+	printf("\tNumero de acidentes: %.0f\n", estatistica.indiceMaior);
 	printf("\n");
 	printf("\tMenor Indice pertence a: %s\n", estatistica.estadoMenorIndice);
-	printf("\tNumero de acidentes: %d\n", estatistica.indiceMenor);
+	printf("\tNumero de acidentes: %.0f\n", estatistica.indiceMenor);
 	
 }
 
@@ -101,16 +105,16 @@ void MostraEstatisticas() {
 	printf("Estatisticas dos Estados:\n");
 	
 	//Quantidade de carros
-	printf("\n\tExistem %d estados registrados, totalizando % veiculos.", quantEstados, estatistica.somaGeralVeiculos);
+	printf("\n\tExistem %d estados registrados, totalizando %.0f veiculos.\n\n", quantEstados, estatistica.somaGeralVeiculos);
 	
 	//Mostra para cada Estado cadastrado
 	int i = 0;
 	for ( i = 0; i < quantEstados; i++) {
 		
 		printf("\t%s:\n", estados[i].nome);
-		printf("\tVeiculos: %d\n", estados[i].numeroVeiculos);
-		printf("\tAcidentes: %d\n", estados[i].numeroAcidentes);
-		printf("\tPercentual: %d\n", estados[i].percentual);
+		printf("\tVeiculos: %.0f\n", estados[i].numeroVeiculos);
+		printf("\tAcidentes: %.0f\n", estados[i].numeroAcidentes);
+		printf("\tPercentual: %.2f\n", estados[i].percentual);
 		printf("\tMedia: %.2f\n", estados[i].mediaAcidentes);
 		
 		printf("\n\n");
@@ -180,6 +184,10 @@ int main(int argc, char *argv[]) {
 					printf("\n\n");
 					MostraEstatisticas();
 					getch();
+					break;
+				
+				default:
+					printf("\n\nOpcao invalida!");
 					break;
 				
 			}
