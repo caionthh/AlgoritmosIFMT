@@ -210,11 +210,13 @@ system("color 03");		//Testando cor
 					{
 						if(atendimento[i][j].num_servico != 0)
 						{
+							printf("===================================================\n");
 							printf("Dia : %d  || Serviço %d: %s\n\n", i+1, j+1, atendimento[i][j].nome);	// i+1 e j+1 para corrigir prblema de vetor
 							printf("Número do serviço: %d\n", atendimento[i][j].num_servico);
 							printf("\nValor do serviço: R$ %.2f\n", atendimento[i][j].valor_servico);
 							printf("\nCódigo do serviço: %d\n", atendimento[i][j].cod_servico);
-							printf("\nCódigo do cliente: %d\n\n\n", atendimento[i][j].cod_cliente);
+							printf("\nCódigo do cliente: %d\n", atendimento[i][j].cod_cliente);
+							printf("===================================================\n\n\n");
 						}
 					}
 				}
