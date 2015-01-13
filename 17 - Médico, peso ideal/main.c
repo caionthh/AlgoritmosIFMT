@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
-
 struct medico
 {
 	char nome[50];
@@ -17,17 +15,18 @@ struct medico
 };
 
 int main(int argc, char *argv[]) {
-<<<<<<< HEAD
 	struct medico paciente[20];
 	int i;
 	float maior_peso = 0;
 	char mais_pesado[50];
 	int opcao;
 	float PesoIdeal (char sexo, float alt);
+	int registrados = 0;
+	int limite = 5;
 
 	system("color 70");
 	
-	for(i=0; i<20 ; i++)
+	for(i=0; i<limite ; i++)
 	{
 		printf("²²²²²²²²²²²²²²²²²²²\n");
 		printf("²² PACIENTE %d \n", i+1);
@@ -52,48 +51,9 @@ int main(int argc, char *argv[]) {
 		printf("²²²²²²²²²²²²²²²²²²²\n" );
 		printf("\n\n");	
 		system("cls");
-		
+		registrados++;
 		paciente[i].peso_ideal = PesoIdeal (paciente[i].sexo, paciente[i].altura);
 	}
-=======
-struct medico paciente[20];
-int i;
-float maior_peso = 0;
-char mais_pesado[50];	// Armazena nome do paciente mais pesado
-int opcao;
-float PesoIdeal (char sexo, float alt);
-
-
-
-for(i=0; i<20 ; i++)	// Entrada de dados ( 20 pacientes )
-{
-	printf("²²²²²²²²²²²²²²²²²²²\n");
-	printf("²² PACIENTE %d \n", i+1);
-	printf("²²²²²²²²²²²²²²²²²²²\n" );
-	printf("²² NOME:");
-	gets(paciente[i].nome);
-	fflush(stdin);	//Limpa memoria ( corrigi problema de armazenar strings )
-	printf("²²²²²²²²²²²²²²²²²\n" );
-	printf("²² IDADE:");
-	scanf("%d", &paciente[i].idade);
-	printf("²²²²²²²²²²²²²²²²²²²\n" );
-	fflush(stdin);
-	printf("²² SEXO (M ou F):");
-	scanf("%c", &paciente[i].sexo);
-	printf("²²²²²²²²²²²²²²²²²²²\n" );
-	printf("²² ALTURA (m): ");
-	scanf("%f", &paciente[i].altura);
-	printf("²²²²²²²²²²²²²²²²²²²\n" );
-	printf("²² PESO (Kg): ");
-	scanf("%f", &paciente[i].peso);
-	fflush(stdin);
-	printf("²²²²²²²²²²²²²²²²²²²\n" );
-	printf("\n\n");	
-	system("cls");
-	
-	paciente[i].peso_ideal = PesoIdeal (paciente[i].sexo, paciente[i].altura);	// Chama funcao que calcula o peso ideal
-}
->>>>>>> origin/master
 	do
 	{
 		printf("²²²²²²²²²²²²²²²²²\n" );
@@ -110,7 +70,7 @@ for(i=0; i<20 ; i++)	// Entrada de dados ( 20 pacientes )
 			
 			case 1:		//Mostra paciente mais pesado
 				
-				for(i=0 ; i<20 ; i++)
+				for(i=0 ; i<registrados ; i++)
 				{
 					if(paciente[i].peso > maior_peso)	//Condicao para verificar qual paciente tem maior peso
 					{
@@ -126,7 +86,7 @@ for(i=0; i<20 ; i++)	// Entrada de dados ( 20 pacientes )
 			break;
 			
 			case 2:		//Mostra pessoas acima do peso
-				for (i=0; i < 20; i++)
+				for (i=0; i < registrados; i++)
 				{
 					if(paciente[i].peso > paciente[i].peso_ideal)
 					{
@@ -139,7 +99,7 @@ for(i=0; i<20 ; i++)	// Entrada de dados ( 20 pacientes )
 			
 			case 3:		//Mostra pessoas abaixo do peso
 				
-				for (i=0; i < 20; i++)
+				for (i=0; i < registrados; i++)
 				{
 					paciente[i].falta_peso = paciente[i].peso_ideal - paciente[i].peso;		//Calcula quanto falta para atingir o peso ideal
 					if(paciente[i].peso < paciente[i].peso_ideal)
@@ -152,6 +112,11 @@ for(i=0; i<20 ; i++)	// Entrada de dados ( 20 pacientes )
 				}
 			break;
 			
+			case 4:
+				printf("Pressione 4 novamente para sair.");
+				scanf("%d", &opcao);
+				break;
+			
 			default:
 				printf("Opcao invalida\n");
 			break;
@@ -161,13 +126,7 @@ for(i=0; i<20 ; i++)	// Entrada de dados ( 20 pacientes )
 	return 0;
 }
 
-<<<<<<< HEAD
-//Metodo para receber peso Ideal
-float PesoIdeal (char sexo, float alt)
-=======
-
 float PesoIdeal (char sexo, float alt)	// Funcao que calcula o peso ideal
->>>>>>> origin/master
 {
 	float peso_ideal = 0; 
 	if ( sexo == 'M' || sexo == 'm')
