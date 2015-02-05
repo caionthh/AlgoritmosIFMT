@@ -4,6 +4,8 @@
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 struct Matricula{
 	int cod_aluno;
+	int indica_6;
+	char descricao[30];
 	int cod_disciplina;
 	int total_faltas;
 	float nota_final;
@@ -11,6 +13,7 @@ struct Matricula{
 };
 
 struct Aluno{
+	char reprovado[30];
 	char nome[30];
 	int codigo;
 	int serie;
@@ -19,6 +22,7 @@ struct Aluno{
 
 struct Contadores{
 	int op;
+	int contador;
 	int i;
 	int teste_cod;
 	int aux;
@@ -34,23 +38,26 @@ struct Diciplinas{
 	int carga_horaria;
 	float max_faltas;
 };
+
 int main(int argc, char *argv[]) { setlocale(LC_ALL, "Portuguese");
 	struct Aluno aluno[10];
 	struct Diciplinas disciplina[6];
 	struct Contadores cont;
 	cont.aux = 0;
+	cont.contador = 0;
 	cont.conta_aluno = 0;
 	cont.conta_matricula = 0;
 	while(cont.op != 7){
-			printf("\n---- Menu de Opções-------\n");
-		printf(" 1- Cadastrar Disciplina\n");
-		printf(" 2- Cadastrar Aluno\n");
-		printf(" 3- Realizar Matricula em Disciplina\n");
-		printf(" 4- Lançar Resultados Finais\n");
-		printf(" 5- Consultar lunos reprovados\n");
-		printf(" 6- Mostrar Disciplinas Cursadas por um Aluno\n");
-		printf(" 7- Sair\n\n");
-		printf("Digite o numero da opção desejada: ");
+		printf("\n|---------------- Menu de Opções ---------------------|\n");
+		printf("| 1- Cadastrar Disciplina                             |\n");
+		printf("| 2- Cadastrar Aluno                                  |\n");
+		printf("| 3- Realizar Matricula em Disciplina                 |\n");
+		printf("| 4- Lançar Resultados Finais                         |\n");
+		printf("| 5- Consultar Alunos Reprovados                      |\n");
+		printf("| 6- Mostrar Disciplinas Cursadas por um Aluno        |\n");
+		printf("| 7- Sair                                             |\n");
+		printf("|Digite o numero da opção desejada:                   |\n");
+		printf("|-----------------------------------------------------|\n");
 		scanf("%d", &cont.op);
 		fflush(stdin);
 		
@@ -63,7 +70,7 @@ int main(int argc, char *argv[]) { setlocale(LC_ALL, "Portuguese");
 				}
 				
 				// Recebendo o codigo da disciplina
-				printf("Entre com o codigo da disciplina: \n");
+				printf("\nEntre com o codigo da disciplina: ");
 				scanf("%d", &cont.teste_cod);
 				fflush(stdin);
 				
@@ -77,13 +84,13 @@ int main(int argc, char *argv[]) { setlocale(LC_ALL, "Portuguese");
 					
 						// Recebendo os dados da disciplina
 						disciplina[cont.aux].cod_disciplina = cont.teste_cod;
-						printf("Entre com a descrição da disciplina: \n");
+						printf("\nEntre com o nome da disciplina: ");
 						gets(disciplina[cont.aux].descricao);
-						printf("Entre com a carga horária da disciplina: \n");
+						printf("\nEntre com a carga horária da disciplina: ");
 						scanf("%d", &disciplina[cont.aux].carga_horaria);
 						// calculando o máximo de faltas possível na disciplina
 						disciplina[cont.aux].max_faltas = (disciplina[cont.aux].carga_horaria * 0,25);
-						printf("A Disciplina %s Foi Cadastrada com Sucesso!\n", disciplina[cont.aux].descricao);
+						printf("A disciplina %s foi fadastrada com sucesso!\n", disciplina[cont.aux].descricao);
 						cont.aux++;// Incremento no contador de disiciplinas
 						break;
 					}
@@ -97,7 +104,7 @@ int main(int argc, char *argv[]) { setlocale(LC_ALL, "Portuguese");
 				}
 				
 				// Recebendo o codigo do aluno
-				printf("Entre com o codigo do aluno: \n");
+				printf("\nEntre com o codigo do aluno: ");
 				scanf("%d", &cont.teste_cod);
 				fflush(stdin);
 				
@@ -108,14 +115,14 @@ int main(int argc, char *argv[]) { setlocale(LC_ALL, "Portuguese");
 				} else{ // Recebendo os dados do aluno
 					if(cont.teste_cod != aluno[0].codigo && cont.teste_cod != aluno[1].codigo){
 						aluno[cont.conta_aluno].codigo = cont.teste_cod;
-						printf("Digite o nome do aluno: \n");
+						printf("\nDigite o nome do aluno: ");
 						gets(aluno[cont.conta_aluno].nome);
-						printf("Digite a série que irá cursar de: \n");
+						printf("\nDigite a série: ");
 						scanf("%d", &aluno[cont.conta_aluno].serie);
 						
 						// Mostrar mensagem caso seja digitado serie inválida e receber novamente
 						if(aluno[cont.conta_aluno].serie != 8 && aluno[cont.conta_aluno].serie != 5 && aluno[cont.conta_aluno].serie != 6 && aluno[cont.conta_aluno].serie != 7){
-							printf("Estão disponíveis somente de 5 a 8 para as series! Digite novamente: \n");
+							printf("\nEstão disponíveis somente de 5 a 8 para as series! Digite novamente: ");
 							scanf("%d", &aluno[cont.conta_aluno].serie);
 						}
 						// Confirmando a matricula
@@ -127,7 +134,7 @@ int main(int argc, char *argv[]) { setlocale(LC_ALL, "Portuguese");
 			
 			case 3:
 				// Recebendo o codigo do aluno
-				printf("Entre com o codigo do aluno: \n");
+				printf("\nEntre com o codigo do aluno: ");
 				scanf("%d", &cont.teste_cod);
 				fflush(stdin);
 				
@@ -142,14 +149,15 @@ int main(int argc, char *argv[]) { setlocale(LC_ALL, "Portuguese");
 					// Depois de encontrar o aluno recebe o codigo da disciplina
 					if(cont.teste_cod == aluno[cont.i].codigo){
 						aluno[cont.i].matricula[cont.conta_matricula].cod_aluno = cont.teste_cod;
-						printf("Digite o codigo da disciplina: \n");
+						printf("\nDigite o codigo da disciplina: ");
 						scanf("%d", &cont.teste_cod);
 						fflush(stdin);
 						
-						// Recebendo o limite de faltas da disciplina que já está cadastrada
+						// Recebendo o limite de faltas da disciplina que já está cadastrada e o nome da disciplina na matricula
 						for(cont.j = 0; cont.j < 2; cont.j++){
 							if(cont.teste_cod == disciplina[cont.j].cod_disciplina){
 								aluno[cont.i].matricula[cont.conta_matricula].max_faltas = disciplina[cont.j].max_faltas;
+								strcpy(aluno[cont.i].matricula[cont.conta_matricula].descricao, disciplina[cont.j].descricao);
 							}
 						}
 						// Verificando se existe disciplina com o codigo digitado
@@ -160,6 +168,8 @@ int main(int argc, char *argv[]) { setlocale(LC_ALL, "Portuguese");
 							
 							// Matriculando o aluno em disciplina
 							aluno[cont.i].matricula[cont.conta_matricula].cod_disciplina = cont.teste_cod;
+							// A indica_6 será utilizada no caso 6	
+							aluno[cont.i].matricula[cont.conta_matricula].indica_6 = 1;
 							printf("Matricula realizada com sucesso!\n");
 							cont.conta_matricula++;
 							break;
@@ -170,7 +180,7 @@ int main(int argc, char *argv[]) { setlocale(LC_ALL, "Portuguese");
 				
 			case 4:
 				// Recebendo o codigo do aluno
-				printf("Entre com o codigo do aluno: \n");
+				printf("\nEntre com o codigo do aluno: ");
 				scanf("%d", &cont.teste_cod);
 				fflush(stdin);
 				
@@ -184,18 +194,18 @@ int main(int argc, char *argv[]) { setlocale(LC_ALL, "Portuguese");
 				for(cont.i = 0; cont.i < 2; cont.i++){
 					if(cont.teste_cod == aluno[cont.i].codigo){
 						// Recebendo o codigo da disciplina que será cadastrado as faltas e a nota final
-						printf("Digite o codigo da cisciplina: ");
+						printf("\nDigite o codigo da disciplina: ");
 						scanf("%d", &cont.procura_disciplina);
 						fflush(stdin);
 						//Procurando disciplina
 						for(cont.j = 0; cont.j < 3; cont.j++){
 							if(cont.procura_disciplina == aluno[cont.i].matricula[cont.j].cod_disciplina){
 								// Recebendo o total de faltas e a nota final
-								printf("Entre com o total de faltas do aluno %s\n", aluno[cont.i].nome);
+								printf("\nEntre com o total de faltas do aluno %s: ", aluno[cont.i].nome);
 								scanf("%d", &aluno[cont.i].matricula[cont.j].total_faltas);
 								fflush(stdin);
 								
-								printf("Entre com a nota final do aluno %s\n", aluno[cont.i].nome);
+								printf("\nEntre com a nota final do aluno %s: ", aluno[cont.i].nome);
 								scanf("%f", &aluno[cont.i].matricula[cont.j].nota_final);
 								fflush(stdin);
 								printf("Os dados foram lançados com sucesso!\n");
@@ -207,13 +217,49 @@ int main(int argc, char *argv[]) { setlocale(LC_ALL, "Portuguese");
 			break;
 				
 			case 5:
+				// Mostrar alunos reprovados
 				for(cont.i = 0; cont.i < 2; cont.i++){
 					for(cont.j = 0; cont.j < 2; cont.j++){
+						// Se o aluno estiver reprovado na disciplina seu nome será copiado para outra variável
 						if(aluno[cont.i].matricula[cont.j].nota_final < 7 && aluno[cont.i].matricula[cont.j].total_faltas > aluno[cont.i].matricula[cont.j].max_faltas){
-							printf("Aluno: %s reprovado\n", aluno[cont.i].nome);
+							strcpy(aluno[cont.i].reprovado, aluno[cont.i].nome);
+							cont.contador++;
+						}else{
 							break;
 						}
-						
+					}
+				}
+				getchar();
+				// Se houver aluno reprovado imprimir lista 
+				if(cont.contador == 0){
+					break;
+				}else{
+					for(cont.i = 0; cont.i < cont.contador; cont.i++){
+						printf("%s\n", aluno[cont.i].reprovado);
+					}
+				}
+			break;
+			
+			case 6:
+				// Recebendo o codigo do aluno
+				printf("\nEntre com o codigo do aluno: ");
+				scanf("%d", &cont.teste_cod);
+				fflush(stdin);
+				for(cont.i = 0; cont.i < 2; cont.i++){
+					// Procurando por aluno que tenha o codigo digitado
+					if(cont.teste_cod == aluno[cont.i].codigo){
+						for(cont.j = 0; cont.j < 2; cont.j++){
+							// Encontrando disciplinas matriculadas e imprimindo variáveis
+							if(aluno[cont.i].matricula[cont.j].indica_6 == 1){// Utilizando variável criada para indicar que a posição do vetor está ocupada
+								printf("Disciplina: %s\nFaltas: %d\nNota final: %.1f\n", aluno[cont.i].matricula[cont.j].descricao, aluno[cont.i].matricula[cont.j].total_faltas, aluno[cont.i].matricula[cont.j].nota_final);
+								// Verificando se aluno está reprovado ou aprovado e mostra o resultado
+								if(aluno[cont.i].matricula[cont.j].nota_final < 7){
+									printf("Reprovado\n");
+								}else{
+									printf("Aprovado");
+								}
+							}
+						}
 					}
 				}
 			break;		
